@@ -7,14 +7,30 @@
  *
  * @author FFC03
  */
+import classes.RealNews;
+import classes.FakeNews;
 public class result extends javax.swing.JFrame {
 
     /**
      * Creates new form result
      */
+    public static int score;
     public result() {
         initComponents();
         news.setText("News #" + questions.currentID);
+        String result = setup.quiz.get(questions.currentID - 1).information() + "\nYou got the type of the news " + (questions.answer.getTypeCorrect() ? "correct." : "incorrect.");
+        if (questions.answer.getErrorCorrect() != null){
+            result += "\nYou got the error of the news " + (questions.answer.getErrorCorrect() ? "correct." : "incorect.");
+        }
+        jTextArea1.setText(result);
+        if (setup.quiz.get(questions.currentID - 1) instanceof RealNews && questions.answer.getTypeCorrect()){
+            score += 2;
+        } else if (setup.quiz.get(questions.currentID - 1) instanceof FakeNews && questions.answer.getTypeCorrect()){
+            score ++;
+            if (questions.answer.getErrorCorrect()){
+                score ++;
+            }
+        }
     }
 
     /**
