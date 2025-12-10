@@ -7,12 +7,19 @@
  *
  * @author FFC03
  */
+import classes.Answer;
+import classes.News;
+import classes.FakeNews;
+import classes.RealNews;
+import java.io.*;
+import java.util.Scanner;
+import java.util.ArrayList;
 public class setup extends javax.swing.JFrame {
 
     /**
      * Creates new form setup
      */
-    public String[] questions;
+    public ArrayList<News> questions;
     public static int size;
     public setup() {
         initComponents();
@@ -114,8 +121,7 @@ public class setup extends javax.swing.JFrame {
                     size = 6;
                 }
             }
-            questions = new String[size];
-            //Remaining parts: randomly generate questions from news.csv
+            questions = randomize(size, jComboBox1.getSelectedItem().toString());
             this.setVisible(false);
             new questions().setVisible(true);
         } catch (NumberFormatException e){
@@ -156,6 +162,32 @@ public class setup extends javax.swing.JFrame {
                 new setup().setVisible(true);
             }
         });
+    }
+    
+    private static ArrayList<News> randomize(int size, String category){
+        try{
+            Scanner scan = new Scanner(new File("News.csv"));
+            while (scan.hasNextLine()){
+                String[] elements = scan.nextLine().split(",");
+                ArrayList<News> news = new ArrayList<News>();
+                if (category.equalsIgnoreCase("All") || elements[1].equalsIgnoreCase(category)){
+                    if (elements[0].equals("Real")){
+                        news.add(new RealNews(elements[1], elements[2], elements[3], elements[4], elements[5], elements[6], elements[7]));
+                    } else{
+                        news.add(new FakeNews(elements[1], elements[2], elements[3], elements[4], elements[5], elements[6], elements[7]));
+                    }
+                }
+            }
+            ArrayList<News> randomized = new ArrayList<News>();
+            for (int i = 0; i < size; i ++){
+                int index = (int)(Math.random() * news.size());
+                randomized.add(news.get(index));
+                news.remove(index);
+            }
+            return randomized;
+        } catch (IOException e){
+            System.out.println("IOException occured");
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
