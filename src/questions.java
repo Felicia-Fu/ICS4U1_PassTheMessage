@@ -7,17 +7,22 @@
  *
  * @author FFC03
  */
+import classes.Answer;
+import classes.RealNews;
+import classes.FakeNews;
 public class questions extends javax.swing.JFrame {
 
     /**
      * Creates new form questions
      */
     public static int currentID = 1;
+    public static Answer answer;
     public questions() {
         initComponents();
         jLabel3.setVisible(false);
         jComboBox1.setVisible(false);
         jLabel2.setText("News #" + currentID);
+        jTextArea1.setText(setup.questions.get(currentID - 1).toString());
     }
 
     /**
@@ -129,7 +134,7 @@ public class questions extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        System.out.println(currentID);
+        answer = new Answer(setup.questions.get(currentID - 1), "Real");
         this.setVisible(false);
         new result().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -142,6 +147,7 @@ public class questions extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
+        answer = new Answer(setup.questions.get(currentID - 1), "Fake", jComboBox1.getSelectedItem().toString());
         this.setVisible(false);
         new result().setVisible(true);
     }//GEN-LAST:event_jComboBox1ActionPerformed
