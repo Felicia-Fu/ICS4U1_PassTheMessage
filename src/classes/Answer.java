@@ -10,7 +10,7 @@ package classes;
  */
 public class Answer {
     private boolean correctType;
-    private boolean correctError;
+    private Boolean correctError;
     public Answer(News news, String identifiedType){
         correctType = news.getType().equalsIgnoreCase(identifiedType);
         correctError = news instanceof FakeNews ? false : null;
@@ -22,7 +22,7 @@ public class Answer {
     public boolean getTypeCorrect(){
         return correctType;
     }
-    public boolean getErrorCorrect(){
+    public Boolean getErrorCorrect(){
         return correctError;
     }
 }
