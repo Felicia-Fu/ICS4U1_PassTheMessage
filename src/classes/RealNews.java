@@ -8,6 +8,6 @@ package classes;
  *
  * @author FFC03
  */
-public class RealNews {
+public class RealNews extends News{
     
 }
