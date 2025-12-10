@@ -13,7 +13,7 @@ public class Answer {
     private boolean correctError;
     public Answer(News news, String identifiedType){
         correctType = news.getType().equalsIgnoreCase(identifiedType);
-        correctError = news instanceof RealNews;
+        correctError = news instanceof FakeNews ? false : null;
     }
     public Answer(News news, String identifiedType, String identifiedError){
         correctType = news.getType().equalsIgnoreCase(identifiedError);
