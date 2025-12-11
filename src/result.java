@@ -14,11 +14,11 @@ public class result extends javax.swing.JFrame {
     /**
      * Creates new form result
      */
-    public static int score;
+    public static int score = 0;
     public result() {
         initComponents();
         news.setText("News #" + questions.currentID);
-        String result = setup.quiz.get(questions.currentID - 1).information() + "\nYou got the type of the news " + (questions.answer.getTypeCorrect() ? "correct." : "incorrect.");
+        String result = setup.quiz.get(questions.currentID - 1).information() + "\n\nYou got the type of the news " + (questions.answer.getTypeCorrect() ? "correct." : "incorrect.");
         if (questions.answer.getErrorCorrect() != null){
             result += "\nYou got the error of the news " + (questions.answer.getErrorCorrect() ? "correct." : "incorect.");
         }
