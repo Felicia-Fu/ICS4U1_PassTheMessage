@@ -107,8 +107,10 @@
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="columns" type="int" value="20"/>
-            <Property name="rows" type="int" value="5"/>
+            <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="news"/>
+            <Property name="wrapStyleWord" type="boolean" value="true"/>
+            <Property name="autoscrolls" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -140,11 +142,12 @@
     <Component class="javax.swing.JComboBox" name="jComboBox1">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Unreliable Source"/>
-            <StringItem index="1" value="Missing Context"/>
-            <StringItem index="2" value="Spelling Error"/>
-            <StringItem index="3" value="Style Mismatch"/>
+          <StringArray count="5">
+            <StringItem index="0" value="Common Sense"/>
+            <StringItem index="1" value="Unreliable Source"/>
+            <StringItem index="2" value="Missing Context"/>
+            <StringItem index="3" value="Spelling Error"/>
+            <StringItem index="4" value="Style Mismatch"/>
           </StringArray>
         </Property>
         <Property name="selectedIndex" type="int" value="-1"/>

@@ -51,8 +51,10 @@ public class questions extends javax.swing.JFrame {
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
+        jTextArea1.setLineWrap(true);
         jTextArea1.setText("news");
+        jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setAutoscrolls(false);
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setText("Real");
@@ -72,7 +74,7 @@ public class questions extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
         jLabel3.setText("Source of Error");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unreliable Source", "Missing Context", "Spelling Error", "Style Mismatch" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Common Sense", "Unreliable Source", "Missing Context", "Spelling Error", "Style Mismatch" }));
         jComboBox1.setSelectedIndex(-1);
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
