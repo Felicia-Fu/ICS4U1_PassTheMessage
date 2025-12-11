@@ -16,7 +16,7 @@ public class Answer {
         correctError = news instanceof FakeNews ? false : null;
     }
     public Answer(News news, String identifiedType, String identifiedError){
-        correctType = news.getType().equalsIgnoreCase(identifiedError);
+        correctType = news.getType().equalsIgnoreCase(identifiedType);
         correctError = news instanceof RealNews? false : ((FakeNews) news).getSourceOfError().equals(identifiedError);
     }
     public boolean getTypeCorrect(){
