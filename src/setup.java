@@ -7,7 +7,6 @@
  *
  * @author FFC03
  */
-import classes.Answer;
 import classes.News;
 import classes.FakeNews;
 import classes.RealNews;
@@ -111,17 +110,12 @@ public class setup extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try{
-            if (number.getText().equals("")){
-                size = 4;
+            if (number.getText().equals("") || Integer.parseInt(number.getText()) > 6){
+                size = 6;
             } else{
-                int input = Integer.parseInt(number.getText());
-                if (input <= 6){
-                    size = input;
-                } else{
-                    size = 6;
-                }
+                size = Integer.parseInt(number.getText());
             }
-            questions = randomize(size, jComboBox1.getSelectedItem().toString());
+            quiz = randomize(size, jComboBox1.getSelectedItem().toString());
             this.setVisible(false);
             new questions().setVisible(true);
         } catch (NumberFormatException e){
@@ -165,16 +159,20 @@ public class setup extends javax.swing.JFrame {
     }
     
     private static ArrayList<News> randomize(int size, String category){
+        ArrayList<News> news = new ArrayList<News>();
         try{
-            Scanner scan = new Scanner(new File("News.csv"));
+            Scanner scan = new Scanner(new File("News.tsv"));
             while (scan.hasNextLine()){
-                String[] elements = scan.nextLine().split(",");
-                ArrayList<News> news = new ArrayList<News>();
+                String[] elements = scan.nextLine().split("\t");
                 if (category.equalsIgnoreCase("All") || elements[1].equalsIgnoreCase(category)){
                     if (elements[0].equals("Real")){
-                        news.add(new RealNews(elements[1], elements[2], elements[3], elements[4], elements[5], elements[6], elements[7]));
+                        news.add(new RealNews(elements[0].trim(), elements[1].trim(), 
+                                elements[2].trim(), elements[3].trim(), elements[4].trim(), 
+                                elements[5].trim(), elements[6].trim(), elements[7].trim()));
                     } else{
-                        news.add(new FakeNews(elements[1], elements[2], elements[3], elements[4], elements[5], elements[6], elements[7]));
+                        news.add(new FakeNews(elements[0].trim(), elements[1].trim(), 
+                                elements[2].trim(), elements[3].trim(), elements[4].trim(), 
+                                elements[5].trim(), elements[6].trim(), elements[7].trim()));
                     }
                 }
             }
@@ -187,6 +185,7 @@ public class setup extends javax.swing.JFrame {
             return randomized;
         } catch (IOException e){
             System.out.println("IOException occured");
+            return news;
         }
     }
 
