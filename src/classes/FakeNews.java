@@ -6,20 +6,24 @@ package classes;
 
 /**
  *
- * @author FFC03
+ * @author Connie
  */
 public class FakeNews extends News{
+    //Instance Variable
     private String sourceOfError;
     
+    //Constructor
     public FakeNews(String type, String category, String headline, String contents, String author, String date, String newsSource, String sourceOfError){
         super(type, category, headline, contents, author, date, newsSource);
         this.sourceOfError = sourceOfError;
     }
     
+    //Returns source of error
     public String getSourceOfError(){
         return sourceOfError;
     }
     
+    //Returns information
     @Override
     public String information(){
         return "This is fake news. Source of Error: " + sourceOfError;
