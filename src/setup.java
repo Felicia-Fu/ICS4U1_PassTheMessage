@@ -14,13 +14,11 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class setup extends javax.swing.JFrame {
-
-    /**
-     * Creates new form setup
-     */
+    //Variables to be passed to other forms
     public static ArrayList<News> quiz;
     public static int size;
     public static final int DEFAULT_SIZE = 6;
+    
     public setup() {
         initComponents();
     }
@@ -110,13 +108,18 @@ public class setup extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        //A try-catch block to check if the user fails to input an integer number
         try{
-            if (number.getText().equals("") || Integer.parseInt(number.getText()) > 6){
+            //If the user doesn't specify the number of questions they want, the number inputted is greater than the
+            //maximum number of questions in each category, or the number inputted is nonpositive, set size to DEFAULT_SIZE.
+            //Otherwise, set size to inputted number.
+            if (number.getText().equals("") || Integer.parseInt(number.getText()) > 6
+                    || Integer.parseInt(number.getText()) <= 0){
                 size = DEFAULT_SIZE;
             } else{
                 size = Integer.parseInt(number.getText());
             }
+            //Randomize a quiz with specified size and category
             quiz = randomize(size, jComboBox1.getSelectedItem().toString());
             this.setVisible(false);
             new questions().setVisible(true);
@@ -160,12 +163,24 @@ public class setup extends javax.swing.JFrame {
         });
     }
     
+    
+    /**
+     * This method randomizes a quiz of real news and fake news with specified size and category.
+     * @param size
+     * @param category
+     * @return an ArrayList of News objects
+     */
     private static ArrayList<News> randomize(int size, String category){
+        //Declare an ArrayList for News objects obtained from the file
         ArrayList<News> news = new ArrayList<News>();
         try{
+            //Read from the "News.tsv" file
             Scanner scan = new Scanner(new File("News.tsv"));
             while (scan.hasNextLine()){
                 String[] elements = scan.nextLine().split("\t");
+                //If the specified category is "All" or the specified category matched the category of the current line,
+                //Add the News object to the ArrayList (if the type of the line is real, instantiate as a RealNews object;
+                //if the type of the line is fake, instantiate as a FakeNews object).
                 if (category.equalsIgnoreCase("All") || elements[1].equalsIgnoreCase(category)){
                     if (elements[0].equals("Real")){
                         news.add(new RealNews(elements[0].trim(), elements[1].trim(), 
@@ -178,12 +193,16 @@ public class setup extends javax.swing.JFrame {
                     }
                 }
             }
+            //Declare another ArrayList of News objects for randomized quiz
             ArrayList<News> randomized = new ArrayList<News>();
+            //Randomize an index, add the News object of ArrayList news at this index to ArrayList randomized.
+            //Remove that object from ArrayList news to avoid replication.
             for (int i = 0; i < size; i ++){
                 int index = (int)(Math.random() * news.size());
                 randomized.add(news.get(index));
                 news.remove(index);
             }
+            //Return the randomized quiz
             return randomized;
         } catch (IOException e){
             System.out.println("IOException occured");
