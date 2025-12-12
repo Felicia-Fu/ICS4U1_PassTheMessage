@@ -20,6 +20,7 @@ public class setup extends javax.swing.JFrame {
      */
     public static ArrayList<News> quiz;
     public static int size;
+    public static final int DEFAULT_SIZE = 6;
     public setup() {
         initComponents();
     }
@@ -111,7 +112,7 @@ public class setup extends javax.swing.JFrame {
         // TODO add your handling code here:
         try{
             if (number.getText().equals("") || Integer.parseInt(number.getText()) > 6){
-                size = 6;
+                size = DEFAULT_SIZE;
             } else{
                 size = Integer.parseInt(number.getText());
             }
