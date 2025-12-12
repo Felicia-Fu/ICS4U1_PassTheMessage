@@ -26,6 +26,6 @@ public class FakeNews extends News{
     //Returns information
     @Override
     public String information(){
-        return "This is fake news. Source of Error: " + sourceOfError;
+        return "This is fake news. \nSource of Error: " + sourceOfError;
     }
 }
